@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import "../styles/Calendar.css";
 import ScheduleSelector from 'react-schedule-selector'
 
 const Calendar = () => {
