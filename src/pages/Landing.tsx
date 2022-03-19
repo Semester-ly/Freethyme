@@ -2,7 +2,7 @@ import { FormControl, IconButton, Input, Paper } from '@material-ui/core';
 import { Add } from "@material-ui/icons";
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { createMeeting } from './meetingNameSlice'
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 function Landing(){
   const meetingName = useAppSelector(state=> state.meetingName.meetingName);

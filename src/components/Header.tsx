@@ -2,14 +2,17 @@ import React, { useState } from "react"
 import Share from "./Share";
 import Edit from "./Edit";
 import Add from "./Add";
+import { useAppSelector } from "../app/hooks";
 
 const Header = ({name}) => {
-    const [Header, setHeader] = useState({meetingName:"", userName:"", selectedTimes: false});
+    const meetingName = useAppSelector(state=> state.meetingName.meetingName);
+
+    const [Header, setHeader] = useState({meetingName:meetingName, userName:"", selectedTimes: false});
 
     return (
         <div className="row">
-      <div className="col-5">
-          <h4>Semesterly Weekly Meeting</h4>
+        <div className="col-5">
+          <h4>{meetingName}</h4>
         </div>
 
         <div className="col-5 text-right">
