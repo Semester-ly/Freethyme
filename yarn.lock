@@ -3121,6 +3121,11 @@
   "resolved" "https://registry.npmjs.org/builtin-modules/-/builtin-modules-3.2.0.tgz"
   "version" "3.2.0"
 
+"buttono@^1.0.4":
+  "integrity" "sha512-aLOeyK3zrhZnqvH6LzwIbjur8mkKhW8Xl3/jolX+RCJnGG354+L48q1SJWdky89uhQ/mBlTxY/d0x8+ciE0ZWw=="
+  "resolved" "https://registry.npmjs.org/buttono/-/buttono-1.0.4.tgz"
+  "version" "1.0.4"
+
 "bytes@3.0.0":
   "integrity" "sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg="
   "resolved" "https://registry.npmjs.org/bytes/-/bytes-3.0.0.tgz"
