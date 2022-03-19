@@ -1,8 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import meetingNameReducer from '../pages/meetingNameSlice';
+
 
 export const store = configureStore({
   reducer: {
-    // TODO
+    meetingName: meetingNameReducer
   },
 });
 
