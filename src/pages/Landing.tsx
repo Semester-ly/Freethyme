@@ -1,15 +1,12 @@
 import { FormControl, IconButton, Input, Paper } from '@material-ui/core';
 import { Add } from "@material-ui/icons";
-import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { useAppDispatch } from '../app/hooks'
 import { createMeeting } from './meetingNameSlice'
 import { useNavigate } from 'react-router-dom'
 
 function Landing(){
-  const meetingName = useAppSelector(state=> state.meetingName.meetingName);
-  console.log(meetingName);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
 
   return(
     <>
@@ -22,9 +19,9 @@ function Landing(){
           />
         </FormControl>
       </Paper>
-      <IconButton className="addSchedule" onClick={() => navigate("/create")}>
-        <Add />
-      </IconButton>
+      <button className="btn btn--add" onClick={() => navigate("/create")}>
+        <span className="btn__text">Create</span>
+      </button>
     </>
 
   )
