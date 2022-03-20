@@ -2,7 +2,6 @@ import Landing from './pages/Landing';
 import Schedule from './pages/Schedule';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
 function App() {
 
 
