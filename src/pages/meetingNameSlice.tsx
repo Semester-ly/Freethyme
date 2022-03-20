@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../app/store'
+import { v4 as uuidv4 } from "uuid";
 
 interface MeetingNameState {
+  id: string
   meetingName: string
 }
 
 const initialState: MeetingNameState = {
+  id: "",
   meetingName: ""
 }
 
@@ -15,6 +18,9 @@ export const meetingNameSlice = createSlice({
   reducers: {
     createMeeting: (state, action: PayloadAction<string>)=>{
       state.meetingName = action.payload
+      // Generate unique id
+      state.id = uuidv4()
+      console.log(state.meetingName)
     }
   }
 })
