@@ -56,7 +56,7 @@ const CreateMeeting = () => {
           </FormControl>
           <button 
             type="submit" 
-            className="btn btn--add btn__text" 
+            className="btn btn--create btn__text" 
             onClick={handleSubmit}>
             Create
           </button>

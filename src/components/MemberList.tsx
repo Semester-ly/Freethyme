@@ -1,5 +1,5 @@
 import Member from './Member';
-import { Box, List, ListItem, ListItemIcon, ListItemText, Checkbox }  from '@material-ui/core';
+import { Box, List, ListItem, ListItemIcon, ListItemText, Checkbox, Divider }  from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import { useState } from 'react';
 
@@ -22,16 +22,17 @@ function MemberList({ members }) {
   };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 240, bgcolor: 'background.paper' }}>
+    <Box sx={{ width: '100%', maxWidth: 240, bgcolor: '#eee' }}>
         <List>
           <ListItemText primary="Participants" />
+          <Divider />
           {members.map((member)=>{
             return (
               <ListItem key={member.id}>
                   <ListItemIcon>
                     <AccountCircle />
                   </ListItemIcon>
-                  <ListItemText primary={member.name} />
+                  <ListItemText secondary={member.name} />
                   <Checkbox
                     edge="end"
                     onChange={handleSelection(member.id)}
@@ -40,6 +41,7 @@ function MemberList({ members }) {
               </ListItem>
             )
           })}
+          
         </List>
     </Box>
 
