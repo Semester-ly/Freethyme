@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 
 const Participants = () => {
-    // participantData has key-value pairs in the format participant_name: selected_time_slots
-    const [participantData, setParticipantData] = useState({})
+    const [name, setName] = useState("");
+    const [selectedTimeSlots, setSelectedTimeSlots] = useState<string[]>([]);
 
     return (
         <div>
@@ -12,3 +12,9 @@ const Participants = () => {
 }
 
 export default Participants;
+
+export interface ParticipantType {
+    name: string;
+    selectedTimeSlots: string[];
+    id: number
+};
