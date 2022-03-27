@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 const Participants = () => {
     const [name, setName] = useState("");
-    const [selectedTimeSlots, setSelectedTimeSlots] = useState<string[]>([]);
+    const [timeSlots, setTimeSlots] = useState<string[]>([]);
 
     return (
         <div>
@@ -14,7 +14,7 @@ const Participants = () => {
 export default Participants;
 
 export interface ParticipantType {
-    name: string;
-    selectedTimeSlots: string[];
     id: number
+    name: string;
+    timeSlots: string[];
 };
