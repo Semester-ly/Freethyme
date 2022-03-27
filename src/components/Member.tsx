@@ -1,8 +1,9 @@
 import React, { useState } from "react"
+import { TimeSlotType } from "./TimeSlot";
 
-const Participants = () => {
+const Member = () => {
     const [name, setName] = useState("");
-    const [timeSlots, setTimeSlots] = useState<string[]>([]);
+    const [timeSlots, setTimeSlots] = useState<TimeSlotType[]>([]);
 
     return (
         <div>
@@ -11,9 +12,9 @@ const Participants = () => {
     )
 }
 
-export default Participants;
+export default Member;
 
-export interface ParticipantType {
+export interface MemberType {
     id: number;
     name: string;
     timeSlots: string[];

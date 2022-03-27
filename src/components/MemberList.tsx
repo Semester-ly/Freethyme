@@ -1,4 +1,4 @@
-import Participants, { ParticipantType } from './Participants';
+import Member, { MemberType } from './Member';
 import { Box, List, ListItem, ListItemIcon, ListItemText }  from '@material-ui/core';
 import { ListItemButton } from '@mui/material';
 import { AccountCircle } from '@material-ui/icons';
@@ -7,12 +7,12 @@ import { useState } from 'react';
 
 
 
-function ParticipantList() {
-  const [selected, setSelected] = useState<ParticipantType[]>([]);
+function MemberList() {
+  const [selected, setSelected] = useState<MemberType[]>([]);
 
   const handleSelection = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: ParticipantType,
+    index: MemberType,
   ) => {
     setSelected([index, ...selected]);
   };
@@ -37,4 +37,4 @@ function ParticipantList() {
 }
 
 
-export default ParticipantList;
+export default MemberList;
