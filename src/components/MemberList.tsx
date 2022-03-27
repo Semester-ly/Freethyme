@@ -1,34 +1,45 @@
-import Member, { MemberType } from './Member';
-import { Box, List, ListItem, ListItemIcon, ListItemText }  from '@material-ui/core';
-import { ListItemButton } from '@mui/material';
+import Member from './Member';
+import { Box, List, ListItem, ListItemIcon, ListItemText, Checkbox }  from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import { useState } from 'react';
 
 
 
+function MemberList({ members }) {
+  const [selected, setSelected] = useState<number[]>([]);
+  console.log(selected);
 
-function MemberList() {
-  const [selected, setSelected] = useState<MemberType[]>([]);
+  const handleSelection = (id: number) => () => {
+    const current = selected.indexOf(id);
+    const newSelected = [...selected];
 
-  const handleSelection = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: MemberType,
-  ) => {
-    setSelected([index, ...selected]);
+    if (current === -1) {
+      newSelected.push(id);
+    } else {
+      newSelected.splice(current, 1);
+    }
+    setSelected(newSelected);
   };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <Box sx={{ width: '100%', maxWidth: 240, bgcolor: 'background.paper' }}>
         <List>
           <ListItemText primary="Participants" />
-          <ListItem>
-            <ListItemButton>
-              <ListItemIcon>
-                <AccountCircle />
-              </ListItemIcon>
-              <ListItemText primary={"rosa"} />
-            </ListItemButton>
-          </ListItem>
+          {members.map((member)=>{
+            return (
+              <ListItem key={member.id}>
+                  <ListItemIcon>
+                    <AccountCircle />
+                  </ListItemIcon>
+                  <ListItemText primary={member.name} />
+                  <Checkbox
+                    edge="end"
+                    onChange={handleSelection(member.id)}
+                    checked={selected.indexOf(member.id) !== -1}
+                  />
+              </ListItem>
+            )
+          })}
         </List>
     </Box>
 
