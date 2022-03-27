@@ -8,7 +8,7 @@ import MemberList from '../components/MemberList';
 function Schedule() {
   return(
     <>
-      {/* <Header name={"userName"}/> */}
+      <Header name={"userName"}/>
       {/* <Calendar /> */}
       <MemberList members={[
         {id:1, name:"rosa", TimeSlot: undefined},
