@@ -14,7 +14,7 @@ const Participants = () => {
 export default Participants;
 
 export interface ParticipantType {
-    id: number
+    id: number;
     name: string;
     timeSlots: string[];
 };
