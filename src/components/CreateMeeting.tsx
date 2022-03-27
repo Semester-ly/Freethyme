@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, FormControl, TextField} from '@material-ui/core'
 import { useAppDispatch } from '../app/hooks'
-import { createMeeting } from "../pages/meetingNameSlice";
+import { createMeeting } from "../pages/meetingSlice";
 import { useNavigate } from 'react-router-dom'
 import '../styles/button.css'
 import axios from 'axios'
@@ -24,7 +24,7 @@ const CreateMeeting = () => {
       axios.post("http://localhost:4000/api/calendars/", { name })
         .then((response)=>{
           id = response.data.id;
-          dispatch(createMeeting({ id, name }));
+          dispatch(createMeeting({ id, name}));
           navigate("/create");
         })
         .catch((error)=>{

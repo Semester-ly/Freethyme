@@ -5,7 +5,7 @@ import Add from "./Add";
 import { useAppSelector } from "../app/hooks";
 
 const Header = ({name}) => {
-    const meetingName = useAppSelector(state=> state.meetingName.meetingName);
+    const meetingName = useAppSelector(state=> state.meeting.name);
 
     const [Header, setHeader] = useState({meetingName:meetingName, userName:"", selectedTimes: false});
 
