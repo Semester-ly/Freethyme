@@ -9,8 +9,10 @@ function App() {
     <>  
       <Router>
         <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/create" element={<Schedule />} />
+          <Route path="/" element={<Landing />} />    
+          <Route path="/:id" element={<Schedule />}>
+              
+          </Route>
         </Routes>
       </Router>
     </>

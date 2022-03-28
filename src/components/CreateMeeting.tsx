@@ -24,8 +24,8 @@ const CreateMeeting = () => {
       axios.post("http://localhost:4000/api/calendars/", { name })
         .then((response)=>{
           id = response.data.id;
-          dispatch(createMeeting({ id, name}));
-          navigate("/create");
+          dispatch(createMeeting({ id, name }));
+          navigate("/" + id);
         })
         .catch((error)=>{
           console.log(error);
