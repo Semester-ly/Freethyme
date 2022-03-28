@@ -4,13 +4,8 @@ import { useAppDispatch } from '../app/hooks'
 import { createMeeting } from "../pages/meetingSlice";
 import { useNavigate } from 'react-router-dom';
 import '../styles/button.css';
+import '../styles/landingPage.css';
 import axios from 'axios';
-
-const styles = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-}
 
 const CreateMeeting = () => {
 
@@ -38,29 +33,29 @@ const CreateMeeting = () => {
     };
 
     return (
-      <Grid container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      style={{ minHeight: "100vh"}}>
-        <FormControl>
-          <TextField fullWidth
-            margin="dense"
-            style={styles}
-            placeholder="Name the Meeting:"
-            aria-label="Name the Meeting:"
-            value={name}
-            onChange={updateName}
-          />
-          </FormControl>
+      <>
+        <div className="flexbox-container">
+        <div className="flexbox-item-1">
+            <FormControl fullWidth>
+              <TextField 
+                placeholder="Name the Meeting:"
+                aria-label="Name the Meeting:"
+                value={name}
+                onChange={updateName}
+              />
+            </FormControl>
+        </div>
+        <div className="flexbox-item-2">
           <button 
             type="submit" 
             className="btn btn--create btn__text" 
             onClick={handleSubmit}>
             Create
           </button>
-      </Grid> 
+        </div>
+        </div>
+      </>
+      
     )
 }
 
