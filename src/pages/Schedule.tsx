@@ -4,11 +4,34 @@
 import Calendar from '../components/Calendar';
 import Header from '../components/Header';
 import MemberList from '../components/MemberList';
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function Schedule() {
+  let id = useParams().id;
+  let [name, setName] = useState("")
+
+  useEffect(() => {
+      axios.get("http://localhost:4000/api/calendars/"+id)
+        .then(function (response) {
+          console.log(response.data)
+          setName(response.data.name)
+        })
+        .catch((error)=>{
+          console.log(error);
+        });
+  }, [])
+
+
   return(
     <>
+<<<<<<< HEAD
+      {<Header name={name}/> }
+=======
       <Header name={"userName"}/>
+>>>>>>> edfb3e8cc30f01e1d392b81ee4742c135491a1a8
       {/* <Calendar /> */}
       <MemberList members={[
         {id:1, name:"rosa", TimeSlot: undefined},

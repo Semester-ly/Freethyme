@@ -20,7 +20,7 @@ const CreateMeeting = () => {
         .then((response)=>{
           id = response.data.id;
           dispatch(createMeeting({ id, name }));
-          navigate("/create");
+          navigate("/" + id);
         })
         .catch((error)=>{
           console.log(error);

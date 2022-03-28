@@ -21,7 +21,7 @@ export const meetingSlice = createSlice({
     createMeeting: (state, action: PayloadAction<Object>)=>{
       state.id = action.payload["id"];
       state.name = action.payload["name"];
-      console.log(state.id, state.name);
+      console.log(`Meeting created with id: ${state.id}, name: ${state.name}`);
     }
   }
 })
