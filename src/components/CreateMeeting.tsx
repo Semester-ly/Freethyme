@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, FormControl, TextField} from '@material-ui/core'
+import { FormControl, TextField} from '@material-ui/core'
 import { useAppDispatch } from '../app/hooks'
 import { createMeeting } from "../pages/meetingSlice";
 import { useNavigate } from 'react-router-dom';

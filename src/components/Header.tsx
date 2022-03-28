@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 import Share from "./Share";
 import Edit from "./Edit";
 import Add from "./Add";
@@ -9,21 +8,21 @@ const Header = ({name}) => {
 
     return (
         <div className="row">
-        <div className="col-5">
+        <div className="col">
           <h4>{meetingName}</h4>
         </div>
 
-        <div className="col-5 text-right">
+        <div className="col text-right">
           <h4>{name}</h4>
         </div>
         
         
-        <div className="col-1">
+        <div className="col">
           <Add/>
         </div>
         
 
-        <div className="col-1">
+        <div className="col">
           <Share/>
         </div>
       </div>
