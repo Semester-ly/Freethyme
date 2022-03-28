@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Grid, FormControl, TextField} from '@material-ui/core'
 import { useAppDispatch } from '../app/hooks'
 import { createMeeting } from "../pages/meetingSlice";
-import { useNavigate } from 'react-router-dom'
-import '../styles/button.css'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import '../styles/button.css';
+import axios from 'axios';
 
 const styles = {
   display: "flex",
@@ -56,7 +56,7 @@ const CreateMeeting = () => {
           </FormControl>
           <button 
             type="submit" 
-            className="btn btn--add btn__text" 
+            className="btn btn--create btn__text" 
             onClick={handleSubmit}>
             Create
           </button>

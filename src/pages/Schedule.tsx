@@ -27,7 +27,11 @@ function Schedule() {
 
   return(
     <>
+<<<<<<< HEAD
       {<Header name={name}/> }
+=======
+      <Header name={"userName"}/>
+>>>>>>> edfb3e8cc30f01e1d392b81ee4742c135491a1a8
       {/* <Calendar /> */}
       <MemberList members={[
         {id:1, name:"rosa", TimeSlot: undefined},

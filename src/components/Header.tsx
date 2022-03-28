@@ -7,8 +7,6 @@ import { useAppSelector } from "../app/hooks";
 const Header = ({name}) => {
     const meetingName = useAppSelector(state=> state.meeting.name);
 
-    const [Header, setHeader] = useState({meetingName:meetingName, userName:"", selectedTimes: false});
-
     return (
         <div className="row">
         <div className="col-5">
@@ -18,11 +16,12 @@ const Header = ({name}) => {
         <div className="col-5 text-right">
           <h4>{name}</h4>
         </div>
-
+        
+        
         <div className="col-1">
-          {/* if user has already selected time then let them edit*/}
-          {Header.selectedTimes? <Edit/>: <Add/>}
+          <Add/>
         </div>
+        
 
         <div className="col-1">
           <Share/>
