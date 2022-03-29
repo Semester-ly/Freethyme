@@ -1,5 +1,5 @@
 import Landing from './pages/Landing';
-import Schedule from './pages/Schedule';
+import Meeting from './pages/Meeting';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Landing />} />    
-          <Route path="/:id" element={<Schedule />}>
+          <Route path="/:id" element={<Meeting />}>
               
           </Route>
         </Routes>
