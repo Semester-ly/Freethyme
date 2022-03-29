@@ -2,10 +2,11 @@ import Member from './Member';
 import { Box, List, ListItem, ListItemIcon, ListItemText, Checkbox, Divider }  from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import { useState } from 'react';
+import { useAppSelector } from '../app/hooks';
 
 
-
-function MemberList({ members }) {
+function MemberList() {
+  const members = useAppSelector(state => state.meeting.members)
   const [selected, setSelected] = useState<number[]>([]);
   console.log(selected);
 

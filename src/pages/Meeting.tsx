@@ -40,7 +40,8 @@ function Schedule() {
         <Calendar />
       </div>
       <div className="item-list">
-        <MemberList members={[
+      <MemberList/>
+        {/* <MemberList members={[
           {id:1, name:"rosa", TimeSlot: undefined},
           {id:2, name:"kiron", TimeSlot: undefined},
           {id:3, name:"james", TimeSlot: undefined},
@@ -55,7 +56,7 @@ function Schedule() {
           {id:12, name:"alex", TimeSlot: undefined},
           {id:13, name:"alex", TimeSlot: undefined},
           {id:14, name:"alex", TimeSlot: undefined},
-          ]}/>
+          ]}/> */}
       </div>
     
 
