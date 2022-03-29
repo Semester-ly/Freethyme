@@ -3,7 +3,7 @@ import Edit from "./Edit";
 import Add from "./Add";
 import { useAppSelector } from "../app/hooks";
 
-const Header = ({name}) => {
+const Header = () => {
     const meetingName = useAppSelector(state=> state.meeting.name);
 
     return (
@@ -13,7 +13,7 @@ const Header = ({name}) => {
         </div>
 
         <div className="col text-right">
-          <h4>{name}</h4>
+          <h4>{}</h4>
         </div>
         
         

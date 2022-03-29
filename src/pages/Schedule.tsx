@@ -9,16 +9,20 @@ import axios from 'axios'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import '../styles/schedule.css';
+import { updateMembers, updateName } from './meetingSlice';
+import { useAppDispatch } from '../app/hooks';
 
 function Schedule() {
+  const dispatch = useAppDispatch();
+  // meeting id
   let id = useParams().id;
-  let [name, setName] = useState("")
 
   useEffect(() => {
       axios.get("http://localhost:4000/api/calendars/"+id)
         .then(function (response) {
-          console.log(response.data)
-          setName(response.data.name)
+          console.log(response.data);
+          dispatch(updateName(response.data.name));
+          dispatch(updateMembers(response.data.members));
         })
         .catch((error)=>{
           console.log(error);
@@ -30,7 +34,7 @@ function Schedule() {
     
     <div className="schedule-container">
       <div className="item-header">
-        <Header name={name}/> 
+        <Header/> 
       </div>
       <div className="item-calendar">
         <Calendar />
