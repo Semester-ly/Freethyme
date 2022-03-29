@@ -17,5 +17,5 @@ export default Member;
 export interface MemberType {
     id: number;
     name: string;
-    timeSlots: string[];
+    timeSlots: TimeSlotType[];
 };
