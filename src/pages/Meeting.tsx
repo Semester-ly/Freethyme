@@ -9,9 +9,8 @@ import axios from 'axios'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import '../styles/schedule.css';
-import { updateMembers, updateName } from './meetingSlice';
+import { updateId, updateMembers, updateName } from './meetingSlice';
 import { useAppDispatch } from '../app/hooks';
-
 function Schedule() {
   const dispatch = useAppDispatch();
   // meeting id
@@ -21,6 +20,7 @@ function Schedule() {
       axios.get("http://localhost:4000/api/calendars/"+id)
         .then(function (response) {
           console.log(response.data);
+          dispatch(updateId(response.data.id));
           dispatch(updateName(response.data.name));
           dispatch(updateMembers(response.data.members));
         })

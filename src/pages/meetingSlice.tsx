@@ -23,17 +23,21 @@ export const meetingSlice = createSlice({
       state.name = action.payload["name"];
       console.log(`Meeting created with id: ${state.id}, name: ${state.name}`);
     },
+    updateId: (state, action: PayloadAction<number>)=>{
+      state.id = action.payload;
+    },
     updateName: (state, action: PayloadAction<string>)=>{
       state.name = action.payload;
-      console.log(action.payload)
     },
     updateMembers: (state, action: PayloadAction<MemberType[]>)=>{
-      state.members = action.payload;
+      state.members = [...action.payload];
+    },
+    addMember: (state, action: PayloadAction<MemberType>)=>{
+      state.members = [action.payload, ...state.members];
     }
-    
   }
 })
 
-export const { createMeeting, updateName, updateMembers } = meetingSlice.actions;
+export const { createMeeting, updateId, updateName, updateMembers, addMember } = meetingSlice.actions;
 export const selectMeetingName = (state: RootState) => state.meeting.name
 export default meetingSlice.reducer
