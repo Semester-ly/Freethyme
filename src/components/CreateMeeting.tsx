@@ -5,26 +5,20 @@ import { createMeeting } from "../pages/meetingSlice";
 import { useNavigate } from 'react-router-dom';
 import '../styles/button.css';
 import '../styles/landingPage.css';
-import axios from 'axios';
+import * as API from "../api/api";
 
 const CreateMeeting = () => {
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const [name, setName] = useState("");
+    const [name, setName] = useState("Unnamed Meeting");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
       event.preventDefault();
-      let id: number;
-      axios.post("http://localhost:4000/api/calendars/", { name })
-        .then((response)=>{
-          id = response.data.id;
-          dispatch(createMeeting({ id, name }));
-          navigate("/" + id);
-        })
-        .catch((error)=>{
-          console.log(error);
-        });
+      const data = await API.createMeeting(name);
+      const id = data.id;
+      dispatch(createMeeting({ id, name }));
+      navigate("/" + id);
     };
 
     // Update name every time user changes text in text field
@@ -40,7 +34,7 @@ const CreateMeeting = () => {
               <TextField 
                 placeholder="Name the Meeting:"
                 aria-label="Name the Meeting:"
-                value={name}
+                value={name === "Unnamed Meeting" ? "" : name}
                 onChange={updateName}
               />
             </FormControl>

@@ -1,31 +1,30 @@
 import Calendar from '../components/Calendar';
 import Header from '../components/Header';
 import MemberList from '../components/MemberList';
-import { useParams } from 'react-router-dom';
-import axios from 'axios'
-import { useEffect } from 'react';
+import * as API from "../api/api";
+import { useEffect } from "react";
 import '../styles/meeting.css';
-import { updateId, updateMembers, updateName } from './meetingSlice';
-import { useAppDispatch } from '../app/hooks';
+import { updateMeetingId, updateMembers, updateMeetingName } from './meetingSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 
-function Schedule() {
+function Meeting(props) {
   const dispatch = useAppDispatch();
-  // meeting id
-  let id = useParams().id;
+  let meetingId = useAppSelector(state=>state.meeting.id);
+
 
   useEffect(() => {
-      axios.get("http://localhost:4000/api/calendars/" + id)
-        .then(function (response) {
-          console.log(response.data);
-          dispatch(updateId(response.data.id));
-          dispatch(updateName(response.data.name));
-          dispatch(updateMembers(response.data.members));
-        })
-        .catch((error)=>{
-          console.log(error);
-        });
-  }, [])
+    const loadData = async () =>{
+      const data = await API.getMeeting(meetingId);
+      dispatch(updateMeetingId(data.id));
+      dispatch(updateMeetingName(data.name));
+      dispatch(updateMembers(data.members));
+    }
+    if (meetingId) {
+      loadData().catch(err=>console.log(err));
+    }
+
+  }, [meetingId, dispatch]);
 
 
   return(
@@ -49,4 +48,4 @@ function Schedule() {
   );
 }
 
-export default Schedule;
+export default Meeting;

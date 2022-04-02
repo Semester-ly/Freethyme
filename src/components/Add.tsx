@@ -1,7 +1,6 @@
-import axios from "axios";
-import { addMember } from "../pages/meetingSlice";
-import { useAppDispatch } from "../app/hooks";
-import { useAppSelector } from "../app/hooks";
+import { addMember, setCurMemberId, setCurMemberName } from "../pages/meetingSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import * as API from "../api/api";
 import { useState } from "react";
 import { TextField } from '@material-ui/core';
 
@@ -14,16 +13,13 @@ const Add = () => {
         setMemberName(event.target.value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        axios.post(`http://localhost:4000//api/calendars/${meetingId}/members/`, { "name": memberName })
-        .then((response)=>{
-          dispatch(addMember({ id: response.data.id, name: response.data.name, timeSlots: response.data.timeSlots }));
-        })
-        .catch((error)=>{
-          console.log(error);
-        });
-      };
+        const data = await API.addNewMember(meetingId, memberName);
+        dispatch(setCurMemberId(data.id));
+        dispatch(setCurMemberName(data.name));
+        dispatch(addMember({ id: data.id, name: data.name, timeSlots: data.timeSlots }));
+    };
 
     return (
         <div className = "row">    

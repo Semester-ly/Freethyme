@@ -6,12 +6,16 @@ interface MeetingState {
   id: number
   name: string
   members: MemberType[]
+  curMemberName: string
+  curMemberId: number
 }
 
 const initialState: MeetingState = {
   id: NaN,
   name: "",
-  members: []
+  members: [],
+  curMemberName: "",
+  curMemberId: NaN,
 }
 
 export const meetingSlice = createSlice({
@@ -21,12 +25,11 @@ export const meetingSlice = createSlice({
     createMeeting: (state, action: PayloadAction<Object>)=>{
       state.id = action.payload["id"];
       state.name = action.payload["name"];
-      console.log(`Meeting created with id: ${state.id}, name: ${state.name}`);
     },
-    updateId: (state, action: PayloadAction<number>)=>{
+    updateMeetingId: (state, action: PayloadAction<number>)=>{
       state.id = action.payload;
     },
-    updateName: (state, action: PayloadAction<string>)=>{
+    updateMeetingName: (state, action: PayloadAction<string>)=>{
       state.name = action.payload;
     },
     updateMembers: (state, action: PayloadAction<MemberType[]>)=>{
@@ -34,10 +37,16 @@ export const meetingSlice = createSlice({
     },
     addMember: (state, action: PayloadAction<MemberType>)=>{
       state.members = [action.payload, ...state.members];
+    },
+    setCurMemberName: (state, action: PayloadAction<string>)=>{
+      state.curMemberName = action.payload;
+    },
+    setCurMemberId: (state, action: PayloadAction<number>)=>{
+      state.curMemberId = action.payload;
     }
   }
 })
 
-export const { createMeeting, updateId, updateName, updateMembers, addMember } = meetingSlice.actions;
+export const { createMeeting, updateMeetingId, updateMeetingName, updateMembers, addMember, setCurMemberName, setCurMemberId } = meetingSlice.actions;
 export const selectMeetingName = (state: RootState) => state.meeting.name
 export default meetingSlice.reducer
