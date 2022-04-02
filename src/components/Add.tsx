@@ -1,10 +1,9 @@
-import React from "react"
 import axios from "axios";
 import { addMember } from "../pages/meetingSlice";
 import { useAppDispatch } from "../app/hooks";
 import { useAppSelector } from "../app/hooks";
 import { useState } from "react";
-import { FormControl, TextField} from '@material-ui/core'
+import { TextField } from '@material-ui/core';
 
 const Add = () => {
     const dispatch = useAppDispatch();
@@ -17,8 +16,6 @@ const Add = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(memberName)
-        console.log(meetingId)
         axios.post(`http://localhost:4000//api/calendars/${meetingId}/members/`, { "name": memberName })
         .then((response)=>{
           dispatch(addMember({ id: response.data.id, name: response.data.name, timeSlots: response.data.timeSlots }));

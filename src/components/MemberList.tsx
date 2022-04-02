@@ -7,6 +7,7 @@ import { useAppSelector } from '../app/hooks';
 
 function MemberList() {
   const members = useAppSelector(state => state.meeting.members)
+  console.log(members);
   const [selected, setSelected] = useState<number[]>([]);
   console.log(selected);
 
