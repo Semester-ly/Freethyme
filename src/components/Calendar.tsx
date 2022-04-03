@@ -16,6 +16,7 @@ const Calendar = () => {
     return (
         <div>
         <ScheduleSelector
+            // renderDateCell={renderDateCell}
             selection={timeSlots}
             numDays={7}
             minTime={8}
