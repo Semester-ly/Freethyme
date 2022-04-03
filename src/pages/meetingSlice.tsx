@@ -22,7 +22,7 @@ export const meetingSlice = createSlice({
   name: "meeting",
   initialState,
   reducers: {
-    createMeeting: (state, action: PayloadAction<Object>)=>{
+    createMeeting: (state, action)=>{
       state.id = action.payload["id"];
       state.name = action.payload["name"];
     },

@@ -1,8 +1,8 @@
 import * as API from "../api/api";
 
-async function addAvail(meetingId, memberId, timeSlots) {
+async function addAvail(meetingId: number, memberId: number, timeSlots: Array<string>) {
   
-  const timeData = timeSlots.map((timeSlot)=>{
+  const timeData = timeSlots.map((timeSlot: string)=>{
     const date = new Date(timeSlot);
     const formattedDate = new Intl.DateTimeFormat('en-GB', { weekday: 'long', hour: 'numeric', minute: 'numeric' }).format(date);
     // "Saturday 23:30"

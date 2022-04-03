@@ -9,11 +9,14 @@ const Add = () => {
     const [memberName, setMemberName] = useState("");
     const meetingId = useAppSelector(state => state.meeting.id)
     
-    const updateMemberName = (event) => {
-        setMemberName(event.target.value);
+    // the fix ??????
+    const updateMemberName = (event: { target: { value: string; }; }) => {
+        const name = event.target.value;
+        setMemberName(name);
     };
-
-    const handleSubmit = async (event) => {
+    
+    // and this ??????
+    const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         const data = await API.addNewMember(meetingId, memberName);
         dispatch(setCurMemberId(data.id));

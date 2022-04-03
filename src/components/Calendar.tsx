@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
-import ScheduleSelector from "react-schedule-selector";
+import { useEffect, useState } from "react";
 import { addAvail } from "./AddAvail";
 import { useAppSelector } from "../app/hooks";
+// @ts-ignore
+import ScheduleSelector from "react-schedule-selector";
+
 
 const Calendar = () => {
     const meetingId = useAppSelector(state => state.meeting.id);
