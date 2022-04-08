@@ -8,7 +8,7 @@ import { updateMeetingId, updateMembers, updateMeetingName } from './meetingSlic
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 
-function Meeting(props) {
+function Meeting() {
   const dispatch = useAppDispatch();
   let meetingId = useAppSelector(state=>state.meeting.id);
 

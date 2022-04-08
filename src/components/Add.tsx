@@ -1,7 +1,7 @@
 import { addMember, setCurMemberId, setCurMemberName } from "../pages/meetingSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import * as API from "../api/api";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { TextField } from '@material-ui/core';
 
 const Add = () => {
@@ -9,16 +9,14 @@ const Add = () => {
     const [memberName, setMemberName] = useState("");
     const meetingId = useAppSelector(state => state.meeting.id)
     
-    // the fix ??????
-    const updateMemberName = (event: { target: { value: string; }; }) => {
-        const name = event.target.value;
-        setMemberName(name);
+    const updateMemberName = (event: FormEvent) => {
+        const element = event.currentTarget as HTMLInputElement;
+        setMemberName(element.value);
     };
     
-    // and this ??????
-    const handleSubmit = async (event: { preventDefault: () => void; }) => {
+    const handleSubmit = async (event: MouseEvent) => {
         event.preventDefault();
-        const data = await API.addNewMember(meetingId, memberName);
+        let data = await API.addNewMember(meetingId, memberName);     
         dispatch(setCurMemberId(data.id));
         dispatch(setCurMemberName(data.name));
         dispatch(addMember({ id: data.id, name: data.name, timeSlots: data.timeSlots }));
@@ -30,14 +28,14 @@ const Add = () => {
                 <TextField 
                     placeholder="New member name"
                     value={memberName}
-                    onChange={updateMemberName}
+                    onChange={()=>updateMemberName}
                 />
             </div>
             <div className="col">
                 <button 
                     type="submit" 
                     className="btn btn--add btn__text"
-                    onClick={handleSubmit}
+                    onClick={()=>handleSubmit}
                     >
                     Add
                 </button>
