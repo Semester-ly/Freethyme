@@ -1,5 +1,5 @@
 import { useState } from "react"
-import ScheduleSelector from 'react-schedule-selector'
+import ScheduleSelector from 'react-schedule-selector';
 
 const Calendar = () => {
     const [timeSlots, setTimeSlots] = useState([]);
