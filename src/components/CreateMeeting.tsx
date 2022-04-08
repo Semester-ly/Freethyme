@@ -13,13 +13,13 @@ const CreateMeeting = () => {
     const navigate = useNavigate();
     const [name, setName] = useState("");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: { preventDefault: () => void; }) => {
       event.preventDefault();
       let id: number;
       axios.post("http://localhost:4000/api/calendars/", { name })
         .then((response)=>{
           id = response.data.id;
-          dispatch(createMeeting({ id, name }));
+          dispatch(createMeeting( id + " " + name ));
           navigate("/" + id);
         })
         .catch((error)=>{
@@ -28,7 +28,7 @@ const CreateMeeting = () => {
     };
 
     // Update name every time user changes text in text field
-    const updateName = (event) => {
+    const updateName = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setName(event.target.value);
     };
 
@@ -41,7 +41,7 @@ const CreateMeeting = () => {
                 placeholder="Name the Meeting:"
                 aria-label="Name the Meeting:"
                 value={name}
-                onChange={updateName}
+                onChange={()=>updateName}
               />
             </FormControl>
         </div>
@@ -49,7 +49,7 @@ const CreateMeeting = () => {
           <button 
             type="submit" 
             className="btn btn--create btn__text" 
-            onClick={handleSubmit}>
+            onClick={()=>handleSubmit}>
             Create
           </button>
         </div>
