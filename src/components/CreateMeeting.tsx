@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { FormControl, TextField} from '@material-ui/core'
 import { useAppDispatch } from '../app/hooks'
 import { createMeeting } from "../pages/meetingSlice";
@@ -13,7 +13,7 @@ const CreateMeeting = () => {
     const navigate = useNavigate();
     const [name, setName] = useState("Unnamed Meeting");
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: MouseEvent) => {
       event.preventDefault();
       const data = await API.createMeeting(name);
       const id = data.id;
@@ -22,8 +22,9 @@ const CreateMeeting = () => {
     };
 
     // Update name every time user changes text in text field
-    const updateName = (event) => {
-        setName(event.target.value);
+    const updateName = (event: FormEvent) => {
+      const element = event.currentTarget as HTMLInputElement;
+      setName(element.value);
     };
 
     return (
@@ -35,7 +36,7 @@ const CreateMeeting = () => {
                 placeholder="Name the Meeting:"
                 aria-label="Name the Meeting:"
                 value={name === "Unnamed Meeting" ? "" : name}
-                onChange={updateName}
+                onChange={()=>updateName}
               />
             </FormControl>
         </div>
@@ -43,7 +44,7 @@ const CreateMeeting = () => {
           <button 
             type="submit" 
             className="btn btn--create btn__text" 
-            onClick={handleSubmit}>
+            onClick={()=>handleSubmit}>
             Create
           </button>
         </div>
