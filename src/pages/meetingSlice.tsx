@@ -18,9 +18,10 @@ export const meetingSlice = createSlice({
   name: "meeting",
   initialState,
   reducers: {
-    createMeeting: (state, action: PayloadAction<Object>)=>{
-      state.id = action.payload["id"];
-      state.name = action.payload["name"];
+    createMeeting: (state, action: PayloadAction<string>)=>{
+      const arr  = action.payload.split(" ");
+      state.id = parseInt(arr[0]);
+      state.name = arr[1];
       console.log(`Meeting created with id: ${state.id}, name: ${state.name}`);
     },
     updateId: (state, action: PayloadAction<number>)=>{
