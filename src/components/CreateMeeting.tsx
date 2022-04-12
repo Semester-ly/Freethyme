@@ -13,7 +13,7 @@ const CreateMeeting = () => {
     const navigate = useNavigate();
     const [name, setName] = useState("Unnamed Meeting");
 
-    const handleSubmit = async (event: MouseEvent) => {
+    const handleSubmit = async (event: any) => {
       event.preventDefault();
       const data = await API.createMeeting(name);
       const id = data.id;
@@ -22,7 +22,7 @@ const CreateMeeting = () => {
     };
 
     // Update name every time user changes text in text field
-    const updateName = (event: FormEvent) => {
+    const updateName = (event: any) => {
       const element = event.currentTarget as HTMLInputElement;
       setName(element.value);
     };
@@ -36,7 +36,7 @@ const CreateMeeting = () => {
                 placeholder="Name the Meeting:"
                 aria-label="Name the Meeting:"
                 value={name === "Unnamed Meeting" ? "" : name}
-                onChange={()=>updateName}
+                onChange={updateName}
               />
             </FormControl>
         </div>
@@ -44,7 +44,7 @@ const CreateMeeting = () => {
           <button 
             type="submit" 
             className="btn btn--create btn__text" 
-            onClick={()=>handleSubmit}>
+            onClick={handleSubmit}>
             Create
           </button>
         </div>

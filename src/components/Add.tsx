@@ -9,12 +9,12 @@ const Add = () => {
     const [memberName, setMemberName] = useState("");
     const meetingId = useAppSelector(state => state.meeting.id)
     
-    const updateMemberName = (event: FormEvent) => {
+    const updateMemberName = (event: any) => {
         const element = event.currentTarget as HTMLInputElement;
         setMemberName(element.value);
     };
     
-    const handleSubmit = async (event: MouseEvent) => {
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
         let data = await API.addNewMember(meetingId, memberName);     
         dispatch(setCurMemberId(data.id));
@@ -28,14 +28,14 @@ const Add = () => {
                 <TextField 
                     placeholder="New member name"
                     value={memberName}
-                    onChange={()=>updateMemberName}
+                    onChange={updateMemberName}
                 />
             </div>
             <div className="col">
                 <button 
                     type="submit" 
                     className="btn btn--add btn__text"
-                    onClick={()=>handleSubmit}
+                    onClick={handleSubmit}
                     >
                     Add
                 </button>
