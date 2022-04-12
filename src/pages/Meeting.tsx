@@ -9,24 +9,24 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useParams } from 'react-router-dom';
 
 function Meeting() {
-  let {id} = useParams();
+  let id = useParams().id as string;
   const dispatch = useAppDispatch();
+  dispatch(updateMeetingId(parseInt(id)))
   let meetingId = useAppSelector(state=>state.meeting.id);
 
 
   useEffect(() => {
     const loadData = async () =>{
-      //const data = await API.getMeeting(meetingId);
-      const data = await API.getMeeting(id);
+      const data = await API.getMeeting(meetingId);
       dispatch(updateMeetingId(data.id));
       dispatch(updateMeetingName(data.name));
       dispatch(updateMembers(data.members));
     }
-    if (id) {
+    if (meetingId) {
       loadData().catch(err=>console.log(err));
     }
 
-  }, [id, dispatch]);
+  }, [meetingId, dispatch]);
 
 
   return(
