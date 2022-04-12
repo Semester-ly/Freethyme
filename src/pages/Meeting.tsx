@@ -6,25 +6,27 @@ import { useEffect } from "react";
 import '../styles/meeting.css';
 import { updateMeetingId, updateMembers, updateMeetingName } from './meetingSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-
+import { useParams } from 'react-router-dom';
 
 function Meeting() {
+  let {id} = useParams();
   const dispatch = useAppDispatch();
   let meetingId = useAppSelector(state=>state.meeting.id);
 
 
   useEffect(() => {
     const loadData = async () =>{
-      const data = await API.getMeeting(meetingId);
+      //const data = await API.getMeeting(meetingId);
+      const data = await API.getMeeting(id);
       dispatch(updateMeetingId(data.id));
       dispatch(updateMeetingName(data.name));
       dispatch(updateMembers(data.members));
     }
-    if (meetingId) {
+    if (id) {
       loadData().catch(err=>console.log(err));
     }
 
-  }, [meetingId, dispatch]);
+  }, [id, dispatch]);
 
 
   return(
