@@ -74,6 +74,7 @@ async function setAvail(meetingId, memberId, timeSlots) {
   }
 }
 
+// don't use, member name unique
 async function renameMember(meetingId, memberId, newName) {
   try{
     const response = await axiosInstance.patch(`/api/calendars/${meetingId}/members/${memberId}`, {name:newName});
@@ -100,5 +101,3 @@ async function removeMember(meetingId, memberId) {
 
 export { createMeeting, getMeeting, removeMember, renameMeeting, renameMember, addNewMember, setAvail };
 
-
-createMeeting("new");
