@@ -68,11 +68,9 @@ const Calendar = () => {
     }
 
 
-    useEffect(()=>{
-        const modified = timeSlots.map(slot => slot.toTimeString());
-        dispatch(setCurMemberSlots([...curMemberSlots, ...modified]));        
+    useEffect(()=>{      
         addAvail(meetingId, memberId, timeSlots);
-    }, [curMemberSlots, dispatch, meetingId, memberId, timeSlots]);
+    }, [meetingId, memberId, timeSlots]);
 
     return (
         <div>
