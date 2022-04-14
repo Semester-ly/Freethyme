@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import { FormControl, TextField} from '@material-ui/core'
 import { useAppDispatch } from '../app/hooks'
 import { createMeeting } from "../pages/meetingSlice";
