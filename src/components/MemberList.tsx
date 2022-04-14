@@ -1,12 +1,14 @@
-import Member from './Member';
 import { Box, List, ListItem, ListItemIcon, ListItemText, Checkbox, Divider }  from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import { useState } from 'react';
-import { useAppSelector } from '../app/hooks';
+import { useAppSelector, useAppDispatch} from '../app/hooks';
+import { selectMembers } from '../pages/meetingSlice';
 
 
 function MemberList() {
-  const members = useAppSelector(state => state.meeting.members)
+  const dispatch = useAppDispatch();
+  const members = useAppSelector(state => state.meeting.members);
+
   console.log(members);
   const [selected, setSelected] = useState<number[]>([]);
   console.log(selected);
@@ -21,6 +23,7 @@ function MemberList() {
       newSelected.splice(current, 1);
     }
     setSelected(newSelected);
+    dispatch(selectMembers(newSelected));
   };
 
   return (
