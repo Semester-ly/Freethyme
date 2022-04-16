@@ -35,6 +35,7 @@ const Calendar = () => {
         let backColor = "gray";
 
         // red: show avaliabilities of selected members
+        let membersInSlot = 0;
         members.forEach((member)=>{
             if (selectedMembers.includes(member.id)) {
                 const slots = member.timeSlots;
@@ -42,15 +43,32 @@ const Calendar = () => {
                     if (slot.day === day 
                         && slot.timeStart === timeStart 
                         && slot.timeEnd === timeEnd) {
-                            backColor = "red";
+                            //backColor = "red";
+                            membersInSlot++;
                         }
                 });
             }
         });
-
-
+        // if (membersInSlot > 0) {
+        //     console.log("intersections: " + membersInSlot);
+        // }
         if (selected) {
             backColor = "green";
+        } else {
+            // backColor = "#" + (membersInSlot * 34444).toString()
+            // console.log(backColor)
+            if (membersInSlot === 1) {
+                backColor = "#FFFFFF"
+            } else if (membersInSlot === 2) {
+                backColor = "#BBBBBB"
+            } else if (membersInSlot === 3) {
+                backColor = "#888888"
+            } else if (membersInSlot === 4) {
+                backColor = "#555555"
+            }
+            else{
+                backColor = "darkseagreen"
+            }
         }
 
         return (
@@ -62,7 +80,7 @@ const Calendar = () => {
                 background: backColor,
                 borderRadius: "3px",
                 }}
-            ></button>
+            > {membersInSlot} </button>
         );
 
     }
