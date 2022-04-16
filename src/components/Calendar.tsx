@@ -33,7 +33,8 @@ const Calendar = () => {
 
         // default cell color, unselected
         let backColor = "gray";
-
+        let opacity = 1;
+        
         // red: show avaliabilities of selected members
         let membersInSlot = 0;
         members.forEach((member)=>{
@@ -49,26 +50,14 @@ const Calendar = () => {
                 });
             }
         });
-        // if (membersInSlot > 0) {
-        //     console.log("intersections: " + membersInSlot);
-        // }
+        
         if (selected) {
             backColor = "green";
         } else {
-            // backColor = "#" + (membersInSlot * 34444).toString()
-            // console.log(backColor)
-            if (membersInSlot === 1) {
-                backColor = "#FFFFFF"
-            } else if (membersInSlot === 2) {
-                backColor = "#BBBBBB"
-            } else if (membersInSlot === 3) {
-                backColor = "#888888"
-            } else if (membersInSlot === 4) {
-                backColor = "#555555"
-            }
-            else{
-                backColor = "darkseagreen"
-            }
+            if (membersInSlot !== 0) {
+                backColor = "blue"
+                opacity = membersInSlot/members.length
+            } 
         }
 
         return (
@@ -78,9 +67,10 @@ const Calendar = () => {
                 width: "100%",
                 height: "100%",
                 background: backColor,
+                opacity: opacity,
                 borderRadius: "3px",
                 }}
-            > {membersInSlot} </button>
+            > </button>
         );
 
     }
