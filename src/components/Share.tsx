@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import { $CombinedState } from '@reduxjs/toolkit';
+import React from 'react';
 
 const Share = () => {
-    const [ copied, setCopied ] = useState(false);
 
+    const handleClick = () => {
+        navigator.clipboard.writeText(window.location.href);
+
+        let prompt = document.getElementById("1") as HTMLElement
+        prompt.style.display = "";
+
+        const hidePrompt = () => {
+            prompt.style.display = "none"
+        }
+        setTimeout(hidePrompt, 1500)
+    }
     return (
         <div>
             <button 
                 className="btn btn--share btn__text" 
-                onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
-                    setCopied(true);
-                }}>
+                onClick={handleClick}>
                 Share
             </button>           
-            {copied ? <span style={{color: 'black'}}>Link copied.</span> : null}
+           <span id = "1" style={{color: 'black', display: "none"}}>Link copied.</span>
         </div>
     )
 }
