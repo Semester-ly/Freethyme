@@ -44,6 +44,7 @@ export const meetingSlice = createSlice({
     },
     removeMember: (state, action: PayloadAction<number>)=>{
       state.members = [...state.members.filter(member => member.id !== action.payload)];
+      state.selectedMembers = [...state.selectedMembers.filter(memberId => memberId !== action.payload)]
     },
     setCurMemberName: (state, action: PayloadAction<string>)=>{
       state.curMemberName = action.payload;
