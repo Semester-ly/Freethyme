@@ -20,7 +20,8 @@ const Add = () => {
         // treat "A" the same as "A   "
         const trimmedName = memberName.trim()
         if (trimmedName === "") {
-            alert("Name can't be blank!")
+            alert("Name can't be blank!");
+            return;
         }
         let isNewMember = true;
         curMembers.forEach((member)=>{ 
