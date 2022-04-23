@@ -17,11 +17,16 @@ const Add = () => {
     
     const handleSubmit = async (event: any) => {
         event.preventDefault();
+        // treat "A" the same as "A   "
+        const trimmedName = memberName.trim()
+        if (trimmedName === "") {
+            alert("Name can't be blank!")
+        }
         let isNewMember = true;
         curMembers.forEach((member)=>{ 
             // Pre: member name unique
             // returning member, set as current user
-            if (member.name === memberName) {
+            if (member.name === trimmedName) {
                 dispatch(setCurMemberId(member.id));
                 dispatch(setCurMemberName(member.name));
                 isNewMember = false;
@@ -29,7 +34,7 @@ const Add = () => {
         });
         // new member
         if (isNewMember){
-            let data = await API.addNewMember(meetingId, memberName);  
+            let data = await API.addNewMember(meetingId, trimmedName);  
             console.log("create new member")   
             dispatch(setCurMemberId(data.id));
             dispatch(setCurMemberName(data.name));
