@@ -1,5 +1,6 @@
 import Share from "./Share";
 import Add from "./Add";
+import Delete from "./Delete";
 import { useAppSelector } from "../app/hooks";
 
 const Header = () => {
@@ -20,6 +21,9 @@ const Header = () => {
           <Add/>
         </div>
         
+        <div className="col">
+          <Delete/>
+        </div>
 
         <div className="col">
           <Share/>

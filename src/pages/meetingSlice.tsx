@@ -42,6 +42,9 @@ export const meetingSlice = createSlice({
     addMember: (state, action: PayloadAction<MemberType>)=>{
       state.members = [action.payload, ...state.members];
     },
+    removeMember: (state, action: PayloadAction<number>)=>{
+      state.members = [...state.members.filter(member => member.id !== action.payload)];
+    },
     setCurMemberName: (state, action: PayloadAction<string>)=>{
       state.curMemberName = action.payload;
     },
@@ -51,6 +54,7 @@ export const meetingSlice = createSlice({
     setCurMemberSlots: (state, action: PayloadAction<string[]>)=>{ // date string
       state.curMemberSlots = action.payload;
     },
+    // store member id's 
     selectMembers: (state, action: PayloadAction<number[]> )=>{ // for display chosen members' times
       state.selectedMembers = action.payload;
     }
@@ -61,7 +65,8 @@ export const { createMeeting,
   updateMeetingId, 
   updateMeetingName, 
   updateMembers, 
-  addMember, 
+  addMember,
+  removeMember, 
   setCurMemberName, 
   setCurMemberId,
   setCurMemberSlots,

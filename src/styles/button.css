@@ -24,8 +24,13 @@ body {
 }
 
 .btn--add {
-  border: 1px solid #35bbe4;
-  background-color: #35bbe4;
+  border: 1px solid #35e46f;
+  background-color: #35e46f;
+}
+
+.btn--delete {
+  border: 1px solid #e43535;
+  background-color: #e43535;
 }
 
 .btn--edit {
