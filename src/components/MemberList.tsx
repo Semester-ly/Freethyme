@@ -26,10 +26,26 @@ function MemberList() {
     dispatch(selectMembers(newSelected));
   };
 
+  const handleClick = () => {
+    const allSelected = members.map(member => member.id)
+    setSelected(allSelected)
+    dispatch(selectMembers(allSelected))
+  }
+
   return (
     <Box sx={{ width: '100%', maxWidth: 240, bgcolor: '#eee' }}>
         <List>
-          <ListItemText primary="Participants" />
+          <div className="row">
+            <div className="col-7" >
+            <ListItemText primary="Participants" />
+            </div>
+            <div className="col-5" style = {{marginTop:"3px"}}>
+              <button onClick={handleClick}>
+                Select All
+              </button>
+            </div>
+          </div>
+
           <Divider />
           {members.map((member)=>{
             return (
