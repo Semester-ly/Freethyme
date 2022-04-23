@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <div className="row">
         <div className="col">
-          <h4>{meetingName}</h4>
+          <h4 style = {{marginTop: "20%", fontSize: "54px", fontFamily: "cursive"}}>{meetingName}</h4>
         </div>
 
         <div className="col text-right">
