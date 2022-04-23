@@ -10,6 +10,7 @@ interface MeetingState {
   curMemberId: number,
   curMemberSlots: string[],
   selectedMembers: number[],
+  hoveredMembers: string[]
 }
 
 const initialState: MeetingState = {
@@ -20,6 +21,7 @@ const initialState: MeetingState = {
   curMemberId: NaN,
   curMemberSlots: [],
   selectedMembers: [],
+  hoveredMembers: []
 }
 
 export const meetingSlice = createSlice({
@@ -58,7 +60,10 @@ export const meetingSlice = createSlice({
     // store member id's 
     selectMembers: (state, action: PayloadAction<number[]> )=>{ // for display chosen members' times
       state.selectedMembers = action.payload;
-    }
+    },
+    updateHoveredMembers: (state, action: PayloadAction<string[]>)=>{ 
+      state.hoveredMembers = [...action.payload];
+    },
   }
 })
 
@@ -71,7 +76,8 @@ export const { createMeeting,
   setCurMemberName, 
   setCurMemberId,
   setCurMemberSlots,
-  selectMembers } = meetingSlice.actions;
+  selectMembers, 
+updateHoveredMembers } = meetingSlice.actions;
 
 export const selectMeetingName = (state: RootState) => state.meeting.name
 export default meetingSlice.reducer

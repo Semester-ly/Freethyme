@@ -1,6 +1,7 @@
 import Share from "./Share";
 import Add from "./Add";
 import Delete from "./Delete";
+import Available from "./Available";
 import { useAppSelector } from "../app/hooks";
 
 const Header = () => {
@@ -9,11 +10,11 @@ const Header = () => {
     return (
         <div className="row">
         <div className="col">
-          <h4 style = {{marginTop: "20%", fontSize: "54px", fontFamily: "cursive"}}>{meetingName}</h4>
+          <h4 style = {{marginTop: "10%", fontSize: "54px", fontFamily: "cursive"}}>{meetingName}</h4>
         </div>
 
         <div className="col text-right">
-          <h4>{}</h4>
+          <Available/>
         </div>
         
         

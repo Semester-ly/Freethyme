@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { setCurMemberSlots } from "../pages/meetingSlice";
+import { updateHoveredMembers } from "../pages/meetingSlice";
 import { addAvail } from "./AddAvail";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 // @ts-ignore
@@ -19,9 +19,6 @@ const Calendar = () => {
     const [timeSlots, setTimeSlots] = useState<Date[]>([]);
     console.log(timeSlots);
 
-    
-
-
 
     const renderDateCell = (date: Date, selected: boolean, refSetter: (dateCell: HTMLElement | null) => void) => {
         const formattedDate = new Intl.DateTimeFormat('en-GB', { weekday: 'long', hour: 'numeric', minute: 'numeric' }).format(date);
@@ -35,8 +32,8 @@ const Calendar = () => {
         let backColor = "gray";
         let opacity = 1;
         
-        // red: show avaliabilities of selected members
-        let membersInSlot = 0;
+        let membersInSlot = [] as string[];
+        let numMembersInSlot = 0;
         members.forEach((member)=>{
             if (selectedMembers.includes(member.id)) {
                 const slots = member.timeSlots;
@@ -44,8 +41,8 @@ const Calendar = () => {
                     if (slot.day === day 
                         && slot.timeStart === timeStart 
                         && slot.timeEnd === timeEnd) {
-                            //backColor = "red";
-                            membersInSlot++;
+                            numMembersInSlot++;
+                            membersInSlot.push(member.name);
                         }
                 });
             }
@@ -54,9 +51,9 @@ const Calendar = () => {
         if (selected) {
             backColor = "green";
         } else {
-            if (membersInSlot !== 0) {
+            if (numMembersInSlot !== 0) {
                 backColor = "blue"
-                opacity = membersInSlot/members.length
+                opacity = numMembersInSlot/members.length
             } 
         }
 
@@ -70,6 +67,10 @@ const Calendar = () => {
                 opacity: opacity,
                 borderRadius: "3px",
                 }}
+                onMouseOver = { () => {
+                    dispatch(updateHoveredMembers(membersInSlot))
+                }
+                }
             > </button>
         );
 
