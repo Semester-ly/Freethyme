@@ -1,23 +1,58 @@
 import { useEffect, useState } from "react";
-import { updateHoveredMembers } from "../pages/meetingSlice";
+import { setCurMemberId, setCurMemberSlots, updateHoveredMembers } from "../pages/meetingSlice";
 import { addAvail } from "./AddAvail";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 // @ts-ignore
 import ScheduleSelector from "react-schedule-selector";
-
+import { convertTStoDate, convertDatetoTS } from "../api/dateFormateConverter";
+import { updateChangedAlready } from "../pages/meetingSlice";
 
 const Calendar = () => {
     const dispatch = useAppDispatch();
     const meetingId = useAppSelector(state => state.meeting.id);
     const memberId = useAppSelector(state => state.meeting.curMemberId);
     const members = useAppSelector(state => state.meeting.members);
-    const curMemberId = useAppSelector(state => state.meeting.curMemberId);
     const curMemberSlots = useAppSelector(state => state.meeting.curMemberSlots);
     const selectedMembers = useAppSelector(state => state.meeting.selectedMembers);
-
+    const changedAlready = useAppSelector(state => state.meeting.changedAlready);
 
     const [timeSlots, setTimeSlots] = useState<Date[]>([]);
-    console.log(timeSlots);
+
+    const handleChange = (event:any) => {
+        console.log(changedAlready)
+        // don't change time slots if we already fetched them
+        if (changedAlready === true) {
+            // if (selectedMembers.length === 0) {
+            //     setTimeSlots([])
+            //     return;
+            // }
+            setTimeSlots(event)
+            dispatch(setCurMemberId(selectedMembers[0]))
+            dispatch(setCurMemberSlots(convertDatetoTS(timeSlots, meetingId, selectedMembers[0])))
+        } 
+    }
+
+    if (selectedMembers.length === 1 && changedAlready === false) {
+        for (let i = 0; i < members.length; i++) {
+            if (members[i].id === selectedMembers[0]) {
+                let convertedDates = convertTStoDate(members[i].timeSlots)
+                dispatch(updateChangedAlready(true))
+                setTimeSlots(convertedDates)
+                console.log("BEEP")
+                console.log(members[i].timeSlots)
+                console.log(convertedDates)
+                break;
+            }
+        }
+    } else if (selectedMembers.length === 0 && changedAlready === false) {
+        dispatch(updateChangedAlready(true))
+        setTimeSlots([])
+    }
+
+    if (selectedMembers.length > 1) {
+        dispatch(updateChangedAlready(false))
+    }
+
 
 
     const renderDateCell = (date: Date, selected: boolean, refSetter: (dateCell: HTMLElement | null) => void) => {
@@ -34,6 +69,7 @@ const Calendar = () => {
         
         let membersInSlot = [] as string[];
         let numMembersInSlot = 0;
+
         members.forEach((member)=>{
             if (selectedMembers.includes(member.id)) {
                 const slots = member.timeSlots;
@@ -47,10 +83,13 @@ const Calendar = () => {
                 });
             }
         });
-        
-        if (selected) {
-            backColor = "green";
-        } else {
+
+        if (selectedMembers.length <= 1) {
+            if (selected) {
+                backColor = "green"
+            } 
+        }
+        else {
             if (numMembersInSlot !== 0) {
                 backColor = "blue"
                 opacity = numMembersInSlot/members.length
@@ -92,7 +131,7 @@ const Calendar = () => {
             hourlyChunks={2}
             dateFormat = "ddd"
             timeFormat = "h:mm A"
-            onChange={setTimeSlots}/>
+            onChange={handleChange}/>
 
         </div>
     )

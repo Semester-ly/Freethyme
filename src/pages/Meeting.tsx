@@ -1,6 +1,7 @@
 import Calendar from '../components/Calendar';
 import Header from '../components/Header';
 import MemberList from '../components/MemberList';
+import Available from "../components/Available";
 import * as API from "../api/api";
 import { useEffect } from "react";
 import '../styles/meeting.css';
@@ -42,9 +43,8 @@ function Meeting() {
         <MemberList/>
       </div>
     
-
       <div className="container-footer"/>
-      
+      <Available/>
     </div>
     
   );

@@ -33,6 +33,11 @@ body {
   background-color: #e43535;
 }
 
+.btn--confirm {
+  border: 1px solid #e4d235;
+  background-color: #e4d235;
+}
+
 .btn--edit {
   border: 1px solid #d29842;
   background-color: #d29842;

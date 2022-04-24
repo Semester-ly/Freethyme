@@ -9,9 +9,7 @@ function MemberList() {
   const dispatch = useAppDispatch();
   const members = useAppSelector(state => state.meeting.members);
 
-  console.log(members);
   const [selected, setSelected] = useState<number[]>([]);
-  console.log(selected);
 
   const handleSelection = (id: number) => () => {
     const current = selected.indexOf(id);

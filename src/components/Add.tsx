@@ -1,4 +1,4 @@
-import { addMember, setCurMemberId, setCurMemberName } from "../pages/meetingSlice";
+import { addMember, selectMembers, setCurMemberId, setCurMemberName } from "../pages/meetingSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import * as API from "../api/api";
 import { useState } from "react";
@@ -9,6 +9,8 @@ const Add = () => {
     const [memberName, setMemberName] = useState("");
     const meetingId = useAppSelector(state => state.meeting.id);
     const curMembers = useAppSelector(state => state.meeting.members);
+    const selectedMembers = useAppSelector(state => state.meeting.selectedMembers);
+
     
     const addMemberName = (event: any) => {
         const element = event.currentTarget as HTMLInputElement;
@@ -21,6 +23,10 @@ const Add = () => {
         const trimmedName = memberName.trim()
         if (trimmedName === "") {
             alert("Name can't be blank!");
+            return;
+        }
+        if (selectedMembers.length !== 0) {
+            alert("Unselect all members to add new availability!")
             return;
         }
         let isNewMember = true;

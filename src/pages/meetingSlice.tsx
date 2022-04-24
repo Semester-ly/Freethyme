@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../app/store'
 import type { MemberType } from '../components/Member'
+import { TimeSlotType } from '../components/TimeSlot'
 
 interface MeetingState {
   id: number
@@ -8,9 +9,10 @@ interface MeetingState {
   members: MemberType[]
   curMemberName: string
   curMemberId: number,
-  curMemberSlots: string[],
+  curMemberSlots: TimeSlotType[],
   selectedMembers: number[],
-  hoveredMembers: string[]
+  hoveredMembers: string[],
+  changedAlready: boolean
 }
 
 const initialState: MeetingState = {
@@ -21,7 +23,8 @@ const initialState: MeetingState = {
   curMemberId: NaN,
   curMemberSlots: [],
   selectedMembers: [],
-  hoveredMembers: []
+  hoveredMembers: [],
+  changedAlready: false
 }
 
 export const meetingSlice = createSlice({
@@ -54,7 +57,8 @@ export const meetingSlice = createSlice({
     setCurMemberId: (state, action: PayloadAction<number>)=>{
       state.curMemberId = action.payload;
     },
-    setCurMemberSlots: (state, action: PayloadAction<string[]>)=>{ // date string
+    setCurMemberSlots: (state, action: PayloadAction<TimeSlotType[]>)=>{ // date string
+      console.log(action.payload)
       state.curMemberSlots = action.payload;
     },
     // store member id's 
@@ -63,6 +67,9 @@ export const meetingSlice = createSlice({
     },
     updateHoveredMembers: (state, action: PayloadAction<string[]>)=>{ 
       state.hoveredMembers = [...action.payload];
+    },
+    updateChangedAlready: (state, action: PayloadAction<boolean>)=>{ 
+      state.changedAlready = action.payload;
     },
   }
 })
@@ -77,7 +84,8 @@ export const { createMeeting,
   setCurMemberId,
   setCurMemberSlots,
   selectMembers, 
-updateHoveredMembers } = meetingSlice.actions;
+updateHoveredMembers,
+updateChangedAlready } = meetingSlice.actions;
 
 export const selectMeetingName = (state: RootState) => state.meeting.name
 export default meetingSlice.reducer

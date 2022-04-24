@@ -1,7 +1,7 @@
 import Share from "./Share";
 import Add from "./Add";
 import Delete from "./Delete";
-import Available from "./Available";
+import Confirm from "./Confirm";
 import { useAppSelector } from "../app/hooks";
 
 const Header = () => {
@@ -14,7 +14,6 @@ const Header = () => {
         </div>
 
         <div className="col text-right">
-          <Available/>
         </div>
         
         
@@ -24,6 +23,10 @@ const Header = () => {
         
         <div className="col">
           <Delete/>
+        </div>
+
+        <div className="col">
+          <Confirm/>
         </div>
 
         <div className="col">
