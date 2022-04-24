@@ -1,14 +1,16 @@
-import { addMember, selectMembers, setCurMemberId, setCurMemberName } from "../pages/meetingSlice";
+import { addMember, selectMembers, setCurMemberId, setCurMemberName, setCurMemberSlots } from "../pages/meetingSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import * as API from "../api/api";
 import { useState } from "react";
 import { TextField } from '@material-ui/core';
+import { TimeSlotType } from "./TimeSlot";
 
 const Add = () => {
     const dispatch = useAppDispatch();
     const [memberName, setMemberName] = useState("");
     const meetingId = useAppSelector(state => state.meeting.id);
     const members = useAppSelector(state => state.meeting.members);
+    const memberSlots = useAppSelector(state => state.meeting.curMemberSlots);
     const selectedMembers = useAppSelector(state => state.meeting.selectedMembers);
 
     
@@ -35,24 +37,24 @@ const Add = () => {
                 return;
             }
         }
-        let isNewMember = true;
-        members.forEach((member)=>{ 
-            // Pre: member name unique
-            // returning member, set as current user
-            if (member.name === trimmedName) {
-                dispatch(setCurMemberId(member.id));
-                dispatch(setCurMemberName(member.name));
-                isNewMember = false;
-            }
-        });
+    
         // new member
-        if (isNewMember){
-            let data = await API.addNewMember(meetingId, trimmedName);  
-            console.log("create new member")   
-            dispatch(setCurMemberId(data.id));
-            dispatch(setCurMemberName(data.name));
-            dispatch(addMember({ id: data.id, name: data.name, timeSlots: data.timeSlots }));
-        }
+        
+        let data = await API.addNewMember(meetingId, trimmedName);  
+        console.log("create new member")   
+        dispatch(setCurMemberId(data.id));
+        dispatch(setCurMemberName(data.name));
+        dispatch(addMember({ id: data.id, name: data.name, timeSlots: data.timeSlots }));
+
+        // memberId is undefined in slots at this point
+        const memberSlotsWithId = memberSlots.map((slot: TimeSlotType) => {
+            return {...slot, memberId: data.id}
+        })
+        dispatch(setCurMemberSlots(memberSlotsWithId))
+
+        console.log(memberSlotsWithId)
+        API.setAvail(meetingId, data.id, memberSlotsWithId)
+        
     };
 
     return (

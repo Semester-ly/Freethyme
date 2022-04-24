@@ -19,10 +19,10 @@ const Calendar = () => {
     const [timeSlots, setTimeSlots] = useState<Date[]>([]);
 
     const handleChange = (event:any) => {
-        console.log(changedAlready)
     
         if (selectedMembers.length === 0) {
             setTimeSlots(event)
+            dispatch(setCurMemberSlots(convertDatetoTS(timeSlots, meetingId, selectedMembers[0])))
             return;
         }
         // let user select slots only after their previous slots have been fetched
@@ -40,9 +40,6 @@ const Calendar = () => {
                 let convertedDates = convertTStoDate(members[i].timeSlots)
                 dispatch(updateChangedAlready(true))
                 setTimeSlots(convertedDates)
-                console.log("BEEP")
-                console.log(members[i].timeSlots)
-                console.log(convertedDates)
                 break;
             }
         }
@@ -120,10 +117,6 @@ const Calendar = () => {
 
     }
 
-
-    useEffect(()=>{      
-        addAvail(meetingId, memberId, timeSlots);
-    }, [meetingId, memberId, timeSlots]);
 
     return (
         <div>

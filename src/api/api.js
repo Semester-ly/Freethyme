@@ -62,6 +62,7 @@ async function addNewMember(meetingId, memberName) {
 
 async function setAvail(meetingId, memberId, timeSlots) {
   try {
+    console.log(timeSlots)
     const response = await axiosInstance.put(`/api/calendars/${meetingId}/members/${memberId}`, { timeSlots });
     return response.data;
     // {

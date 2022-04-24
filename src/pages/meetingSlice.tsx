@@ -58,7 +58,6 @@ export const meetingSlice = createSlice({
       state.curMemberId = action.payload;
     },
     setCurMemberSlots: (state, action: PayloadAction<TimeSlotType[]>)=>{ // date string
-      console.log(action.payload)
       state.curMemberSlots = action.payload;
     },
     // store member id's 
