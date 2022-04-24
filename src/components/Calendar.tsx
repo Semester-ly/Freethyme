@@ -22,10 +22,7 @@ const Calendar = () => {
         console.log(changedAlready)
         // don't change time slots if we already fetched them
         if (changedAlready === true) {
-            // if (selectedMembers.length === 0) {
-            //     setTimeSlots([])
-            //     return;
-            // }
+
             setTimeSlots(event)
             dispatch(setCurMemberId(selectedMembers[0]))
             dispatch(setCurMemberSlots(convertDatetoTS(timeSlots, meetingId, selectedMembers[0])))
@@ -44,12 +41,9 @@ const Calendar = () => {
                 break;
             }
         }
-    } else if (selectedMembers.length === 0 && changedAlready === false) {
-        dispatch(updateChangedAlready(true))
-        setTimeSlots([])
-    }
+    } 
 
-    if (selectedMembers.length > 1) {
+    if (selectedMembers.length !== 1) {
         dispatch(updateChangedAlready(false))
     }
 
