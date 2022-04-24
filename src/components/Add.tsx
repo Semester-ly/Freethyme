@@ -8,7 +8,7 @@ const Add = () => {
     const dispatch = useAppDispatch();
     const [memberName, setMemberName] = useState("");
     const meetingId = useAppSelector(state => state.meeting.id);
-    const curMembers = useAppSelector(state => state.meeting.members);
+    const members = useAppSelector(state => state.meeting.members);
     const selectedMembers = useAppSelector(state => state.meeting.selectedMembers);
 
     
@@ -29,8 +29,14 @@ const Add = () => {
             alert("Unselect all members to add new availability!")
             return;
         }
+        for (let i = 0; i < members.length; i++) {
+            if (members[i].name === trimmedName) {
+                alert("Member with this name already exists!");
+                return;
+            }
+        }
         let isNewMember = true;
-        curMembers.forEach((member)=>{ 
+        members.forEach((member)=>{ 
             // Pre: member name unique
             // returning member, set as current user
             if (member.name === trimmedName) {
