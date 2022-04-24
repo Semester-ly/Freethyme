@@ -20,7 +20,12 @@ const Calendar = () => {
 
     const handleChange = (event:any) => {
         console.log(changedAlready)
-        // don't change time slots if we already fetched them
+    
+        if (selectedMembers.length === 0) {
+            setTimeSlots(event)
+            return;
+        }
+        // let user select slots only after their previous slots have been fetched
         if (changedAlready === true) {
 
             setTimeSlots(event)
@@ -43,10 +48,16 @@ const Calendar = () => {
         }
     } 
 
-    if (selectedMembers.length !== 1) {
+    // make sure that changedAlready is false when we go back to 1 selected member
+    if (selectedMembers.length > 1) {
         dispatch(updateChangedAlready(false))
+    } 
+    // changedAlready is always true when we first reach 0 selected members
+    else if (selectedMembers.length === 0 && changedAlready === true) {
+        dispatch(updateChangedAlready(false))
+        setTimeSlots([])
     }
-
+ 
 
 
     const renderDateCell = (date: Date, selected: boolean, refSetter: (dateCell: HTMLElement | null) => void) => {
