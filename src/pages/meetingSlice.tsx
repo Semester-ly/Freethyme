@@ -47,6 +47,13 @@ export const meetingSlice = createSlice({
     addMember: (state, action: PayloadAction<MemberType>)=>{
       state.members = [action.payload, ...state.members];
     },
+    updateMemberSlots: (state, action: PayloadAction<MemberType>)=>{
+      for (let i = 0; i < state.members.length; i++) {
+        if (state.members[i].id === action.payload.id) {
+          state.members[i].timeSlots = action.payload.timeSlots
+        }
+      }
+    },
     removeMember: (state, action: PayloadAction<number>)=>{
       state.members = [...state.members.filter(member => member.id !== action.payload)];
       state.selectedMembers = [...state.selectedMembers.filter(memberId => memberId !== action.payload)]
@@ -84,7 +91,8 @@ export const { createMeeting,
   setCurMemberSlots,
   selectMembers, 
 updateHoveredMembers,
-updateChangedAlready } = meetingSlice.actions;
+updateChangedAlready,
+updateMemberSlots } = meetingSlice.actions;
 
 export const selectMeetingName = (state: RootState) => state.meeting.name
 export default meetingSlice.reducer

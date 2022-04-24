@@ -50,9 +50,7 @@ const Add = () => {
         const memberSlotsWithId = memberSlots.map((slot: TimeSlotType) => {
             return {...slot, memberId: data.id}
         })
-        dispatch(setCurMemberSlots(memberSlotsWithId))
 
-        console.log(memberSlotsWithId)
         API.setAvail(meetingId, data.id, memberSlotsWithId)
         
     };

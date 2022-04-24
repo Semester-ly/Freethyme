@@ -1,4 +1,6 @@
 import axios from "axios";
+import { store } from "../app/store";
+import { setCurMemberSlots, updateMemberSlots } from "../pages/meetingSlice";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:4000",
@@ -62,8 +64,9 @@ async function addNewMember(meetingId, memberName) {
 
 async function setAvail(meetingId, memberId, timeSlots) {
   try {
-    console.log(timeSlots)
+    store.dispatch(setCurMemberSlots(timeSlots))
     const response = await axiosInstance.put(`/api/calendars/${meetingId}/members/${memberId}`, { timeSlots });
+    store.dispatch(updateMemberSlots({id: memberId, name: response.data.name, timeSlots: timeSlots }))
     return response.data;
     // {
     //   "id": integer
