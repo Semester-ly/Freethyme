@@ -1,66 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { Grid, FormControl, TextField} from '@material-ui/core'
+import React, { useState } from "react";
+import { FormControl, TextField} from '@material-ui/core'
 import { useAppDispatch } from '../app/hooks'
-import { createMeeting } from "../pages/meetingNameSlice";
-import { useNavigate } from 'react-router-dom'
-import '../styles/button.css'
-import axios from 'axios'
-
-const styles = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-}
+import { createMeeting } from "../pages/meetingSlice";
+import { useNavigate } from 'react-router-dom';
+import '../styles/button.css';
+import '../styles/landingPage.css';
+import * as API from "../api/api";
 
 const CreateMeeting = () => {
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const [name, setName] = useState("");
+    const [name, setName] = useState("Unnamed Meeting");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event: any) => {
       event.preventDefault();
-      let id: number;
-      axios.post("http://localhost:4000/api/calendars/", { name })
-        .then((response)=>{
-          id = response.data.id;
-          dispatch(createMeeting({ id, name }));
-          navigate("/create");
-        })
-        .catch((error)=>{
-          console.log(error);
-        });
+      const data = await API.createMeeting(name);
+      const id = data.id;
+      dispatch(createMeeting({ id, name }));
+      navigate("/" + id);
     };
 
     // Update name every time user changes text in text field
-    const updateName = (event) => {
-        setName(event.target.value);
+    const updateName = (event: any) => {
+      const element = event.currentTarget as HTMLInputElement;
+      setName(element.value);
     };
 
     return (
-      <Grid container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      style={{ minHeight: "100vh"}}>
-        <FormControl>
-          <TextField fullWidth
-            margin="dense"
-            style={styles}
-            placeholder="Name the Meeting:"
-            aria-label="Name the Meeting:"
-            value={name}
-            onChange={updateName}
-          />
-          </FormControl>
+      <>
+        <div className="flexbox-container">
+        <div className="flexbox-item-1">
+            <FormControl fullWidth>
+              <TextField 
+                placeholder="Name the Meeting:"
+                aria-label="Name the Meeting:"
+                value={name === "Unnamed Meeting" ? "" : name}
+                onChange={updateName}
+              />
+            </FormControl>
+        </div>
+        <div className="flexbox-item-2">
           <button 
             type="submit" 
-            className="btn btn--add btn__text" 
+            className="btn btn--create btn__text" 
             onClick={handleSubmit}>
             Create
           </button>
-      </Grid> 
+        </div>
+        </div>
+      </>
+      
     )
 }
 

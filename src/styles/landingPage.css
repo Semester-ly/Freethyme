@@ -1,0 +1,18 @@
+.flexbox-container {
+  height: 700px;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.flexbox-item-1 {
+  min-width: 80%;
+}
+
+.flexbox-item-2 {
+  width: 80%;
+}
+
