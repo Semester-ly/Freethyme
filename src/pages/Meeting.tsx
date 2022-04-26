@@ -8,6 +8,8 @@ import '../styles/meeting.css';
 import { updateMeetingId, updateMembers, updateMeetingName } from './meetingSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useParams } from 'react-router-dom';
+import { Box, Grid } from '@material-ui/core';
+
 
 function Meeting() {
   let id = useParams().id as string;
@@ -32,20 +34,36 @@ function Meeting() {
 
   return(
     
-    <div className="meeting-container">
-      <div className="item-header">
-        <Header/> 
-      </div>
-      <div className="item-calendar">
-        <Calendar />
-      </div>
-      <div className="item-list">
-        <MemberList/>
-      </div>
     
-      <div className="container-footer"/>
-      <Available/>
-    </div>
+    <>
+
+      <Box m={4}>
+        <Grid container >
+            <Header/> 
+        </Grid>
+      </Box>
+   
+
+      <Box m={4}>
+        <Grid container spacing={3}>
+          <Grid item xs={9}>
+            <Calendar />
+          </Grid>
+          <Grid item>
+            <MemberList/>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <Box m={4}>
+        <Grid container >
+          <Available/>
+        </Grid>
+      </Box>
+
+    </>
+
+    
     
   );
 }

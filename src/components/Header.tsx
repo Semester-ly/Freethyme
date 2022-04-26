@@ -3,35 +3,39 @@ import Add from "./Add";
 import Delete from "./Delete";
 import Confirm from "./Confirm";
 import { useAppSelector } from "../app/hooks";
+import { Grid, Box } from '@material-ui/core';
 
 const Header = () => {
     const meetingName = useAppSelector(state=> state.meeting.name);
 
     return (
-        <div className="row">
-        <div className="col">
-          <h4 style = {{marginTop: "10%", fontSize: "54px", fontFamily: "cursive"}}>{meetingName}</h4>
-        </div>
+        <Grid container spacing={3} justify="center">
+          <Grid item>
+            <Box margin={"10px"}>
+              <h4 style = {{marginTop: "10%", fontSize: "54px", fontFamily: "cursive"}}>{meetingName}</h4>
+            </Box>
+          </Grid>
 
-        <div className="col text-right">
-        </div>
-      
-        <div className="col">
+          <Grid item>
           <Add/>
-        </div>
-        
-        <div className="col">
+          </Grid>
+
+          <Grid item>
           <Delete/>
-        </div>
+          </Grid>
 
-        <div className="col">
+          <Grid item>
           <Confirm/>
-        </div>
+          </Grid>
 
-        <div className="col">
+          <Grid item justifyContent="flex-end">
           <Share/>
-        </div>
-      </div>
+          </Grid>
+
+        </Grid >
+
+
+      
     )
 }
 

@@ -59,7 +59,7 @@ const Add = () => {
         <div className = "row">    
             <div className="col" style={{padding: "40px"}}>
                 <TextField 
-                    placeholder="New member name"
+                    placeholder="Your name..."
                     value={memberName}
                     onChange={addMemberName}
                 />
