@@ -15,6 +15,7 @@ const Confirm = () => {
         }
         API.setAvail(meetingId, memberId, curMemberSlots)
     }
+
     return (
         <div>
             <button 

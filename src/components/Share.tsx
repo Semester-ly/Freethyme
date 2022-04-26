@@ -13,6 +13,7 @@ const Share = () => {
         }
         setTimeout(hidePrompt, 1500)
     }
+    
     return (
         <div>
             <button 

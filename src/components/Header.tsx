@@ -15,8 +15,7 @@ const Header = () => {
 
         <div className="col text-right">
         </div>
-        
-        
+      
         <div className="col">
           <Add/>
         </div>

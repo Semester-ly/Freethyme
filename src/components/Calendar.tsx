@@ -27,33 +27,37 @@ const Calendar = () => {
         }
         // let user select slots only after their previous slots have been fetched
         if (changedAlready === true) {
-
             setTimeSlots(event)
             dispatch(setCurMemberId(selectedMembers[0]))
             dispatch(setCurMemberSlots(convertDatetoTS(timeSlots, meetingId, selectedMembers[0])))
         } 
     }
 
-    if (selectedMembers.length === 1 && changedAlready === false) {
-        for (let i = 0; i < members.length; i++) {
-            if (members[i].id === selectedMembers[0]) {
-                let convertedDates = convertTStoDate(members[i].timeSlots)
-                dispatch(updateChangedAlready(true))
-                setTimeSlots(convertedDates)
-                break;
-            }
-        }
-    } 
+    useEffect(()=>{
 
-    // make sure that changedAlready is false when we go back to 1 selected member
-    if (selectedMembers.length > 1) {
-        dispatch(updateChangedAlready(false))
-    } 
-    // changedAlready is always true when we first reach 0 selected members
-    else if (selectedMembers.length === 0 && changedAlready === true) {
-        dispatch(updateChangedAlready(false))
-        setTimeSlots([])
-    }
+        if (selectedMembers.length === 1 && changedAlready === false) {
+            for (let i = 0; i < members.length; i++) {
+                if (members[i].id === selectedMembers[0]) {
+                    let convertedDates = convertTStoDate(members[i].timeSlots)
+                    dispatch(updateChangedAlready(true))
+                    setTimeSlots(convertedDates)
+                    break;
+                }
+            }
+        } 
+    
+        // make sure that changedAlready is false when we go back to 1 selected member
+        if (selectedMembers.length > 1) {
+            dispatch(updateChangedAlready(false))
+        } 
+        // changedAlready is always true when we first reach 0 selected members
+        else if (selectedMembers.length === 0 && changedAlready === true) {
+            dispatch(updateChangedAlready(false))
+            setTimeSlots([])
+        }
+
+    }, [changedAlready, dispatch, members, selectedMembers])
+    
  
 
 
