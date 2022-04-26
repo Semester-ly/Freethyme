@@ -1,33 +1,41 @@
-import React, { useState } from "react"
 import Share from "./Share";
-import Edit from "./Edit";
 import Add from "./Add";
+import Delete from "./Delete";
+import Confirm from "./Confirm";
 import { useAppSelector } from "../app/hooks";
+import { Grid, Box } from '@material-ui/core';
 
-const Header = ({name}) => {
-    const meetingName = useAppSelector(state=> state.meetingName.meetingName);
-
-    const [Header, setHeader] = useState({meetingName:meetingName, userName:"", selectedTimes: false});
+const Header = () => {
+    const meetingName = useAppSelector(state=> state.meeting.name);
 
     return (
-        <div className="row">
-        <div className="col-5">
-          <h4>{meetingName}</h4>
-        </div>
+        <Grid container spacing={3} justify="center">
+          <Grid item>
+            <Box margin={"10px"}>
+              <h4 style = {{marginTop: "10%", fontSize: "54px", fontFamily: "cursive"}}>{meetingName}</h4>
+            </Box>
+          </Grid>
 
-        <div className="col-5 text-right">
-          <h4>{name}</h4>
-        </div>
+          <Grid item>
+          <Add/>
+          </Grid>
 
-        <div className="col-1">
-          {/* if user has already selected time then let them edit*/}
-          {Header.selectedTimes? <Edit/>: <Add/>}
-        </div>
+          <Grid item>
+          <Delete/>
+          </Grid>
 
-        <div className="col-1">
+          <Grid item>
+          <Confirm/>
+          </Grid>
+
+          <Grid item justifyContent="flex-end">
           <Share/>
-        </div>
-      </div>
+          </Grid>
+
+        </Grid >
+
+
+      
     )
 }
 
