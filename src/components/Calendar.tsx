@@ -55,8 +55,10 @@ const Calendar = () => {
         setTimeSlots([])
     }
  
-    console.log(timeSlots)
     let d = getNextMonday();
+
+    // console.log(selectedMembers)
+    // console.log(members)
 
 
     const renderDateCell = (date: Date, selected: boolean, refSetter: (dateCell: HTMLElement | null) => void) => {
@@ -91,7 +93,6 @@ const Calendar = () => {
         if (selectedMembers.length <= 1) {
             if (selected) {
                 backColor = "green"
-                console.log(date)
             } 
         }
         else {
