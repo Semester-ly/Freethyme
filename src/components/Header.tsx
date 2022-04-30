@@ -1,30 +1,35 @@
-import React, { useState } from "react"
 import Share from "./Share";
-import Edit from "./Edit";
 import Add from "./Add";
+import Delete from "./Delete";
+import Confirm from "./Confirm";
 import { useAppSelector } from "../app/hooks";
 
-const Header = ({name}) => {
-    const meetingName = useAppSelector(state=> state.meetingName.meetingName);
-
-    const [Header, setHeader] = useState({meetingName:meetingName, userName:"", selectedTimes: false});
+const Header = () => {
+    const meetingName = useAppSelector(state=> state.meeting.name);
 
     return (
         <div className="row">
-        <div className="col-5">
-          <h4>{meetingName}</h4>
+        <div className="col">
+          <h4 style = {{marginTop: "10%", fontSize: "54px", fontFamily: "cursive"}}>{meetingName}</h4>
         </div>
 
-        <div className="col-5 text-right">
-          <h4>{name}</h4>
+        <div className="col text-right">
+        </div>
+        
+        
+        <div className="col">
+          <Add/>
+        </div>
+        
+        <div className="col">
+          <Delete/>
         </div>
 
-        <div className="col-1">
-          {/* if user has already selected time then let them edit*/}
-          {Header.selectedTimes? <Edit/>: <Add/>}
+        <div className="col">
+          <Confirm/>
         </div>
 
-        <div className="col-1">
+        <div className="col">
           <Share/>
         </div>
       </div>
