@@ -1,23 +1,20 @@
 import { TimeSlotType } from "../components/TimeSlot"
 
 export function convertTStoDate(slots: TimeSlotType[]){
-    const dayMap : any = {"Sunday":0, "Monday":1, "Tuesday":2, "Wednesday":3, "Thursday":4, "Friday":5, "Saturday":6} as Object
-    const present = new Date();
-    const currYear = present.getFullYear();
-    let currDayOfMonth = present.getDate();
-    let currWeekday = present.getDay();
-    const currMonth = present.getMonth()
+    const dayMap : any = {"Monday":0, "Tuesday":1, "Wednesday":2, "Thursday":3, "Friday":4, "Saturday":5, "Sunday":6} as Object
+    const start = getNextMonday();
+    const startYear = start.getFullYear();
+    let startDayOfMonth = start.getDate();
+    const startMonth = start.getMonth()
     let converted = [] as Date[]
     // need to extract hours from no of mins
     slots.forEach(slot => {
-        let daysToAdd;
         let slotDay = dayMap[slot.day] as number
-        daysToAdd = slotDay - currWeekday
         // 1410 becomes 23.5
         let hourFloat = slot.timeStart/60
         let hour = Math.floor(hourFloat)
         let minutes = 60 * (hourFloat % 1) // 30 or 0
-        converted.push(new Date(currYear, currMonth, currDayOfMonth + daysToAdd, hour, minutes))
+        converted.push(new Date(startYear, startMonth, startDayOfMonth + slotDay, hour, minutes))
     });
     return converted
 }
