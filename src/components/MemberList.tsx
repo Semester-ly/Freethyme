@@ -8,25 +8,25 @@ import { selectMembers } from '../pages/meetingSlice';
 function MemberList() {
   const dispatch = useAppDispatch();
   const members = useAppSelector(state => state.meeting.members);
+  const selectedMembers = useAppSelector(state => state.meeting.selectedMembers);
 
-  const [selected, setSelected] = useState<number[]>([]);
+  // const [selected, setSelected] = useState<number[]>([]);
 
   const handleSelection = (id: number) => () => {
-    const current = selected.indexOf(id);
-    const newSelected = [...selected];
-
+    const current = selectedMembers.indexOf(id);
+    const newSelected = [...selectedMembers];
     if (current === -1) {
       newSelected.push(id);
     } else {
       newSelected.splice(current, 1);
     }
-    setSelected(newSelected);
+    // setSelected(newSelected);
     dispatch(selectMembers(newSelected));
   };
 
   const handleClick = () => {
     const allSelected = members.map(member => member.id)
-    setSelected(allSelected)
+    // setSelected(allSelected)
     dispatch(selectMembers(allSelected))
   }
 
@@ -55,7 +55,7 @@ function MemberList() {
                   <Checkbox
                     edge="end"
                     onChange={handleSelection(member.id)}
-                    checked={selected.indexOf(member.id) !== -1}
+                    checked={selectedMembers.indexOf(member.id) !== -1}
                   />
               </ListItem>
             )
