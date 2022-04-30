@@ -42,3 +42,10 @@ export function convertDatetoTS(dates: Date[], meetingId:number, memberId:number
     return timeData
 }
 
+export function getNextMonday() {
+  let d = new Date();
+  // get next Monday (or today if today is Monday)
+  d.setDate(d.getDate() + ((7-d.getDay())%7+1) % 7);
+  return d;
+}
+

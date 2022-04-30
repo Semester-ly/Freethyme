@@ -4,7 +4,7 @@ import { addAvail } from "./AddAvail";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 // @ts-ignore
 import ScheduleSelector from "react-schedule-selector";
-import { convertTStoDate, convertDatetoTS } from "../api/dateFormateConverter";
+import { convertTStoDate, convertDatetoTS, getNextMonday } from "../api/dateFormateConverter";
 import { updateChangedAlready } from "../pages/meetingSlice";
 
 const Calendar = () => {
@@ -55,6 +55,8 @@ const Calendar = () => {
         setTimeSlots([])
     }
  
+    console.log(timeSlots)
+    let d = getNextMonday();
 
 
     const renderDateCell = (date: Date, selected: boolean, refSetter: (dateCell: HTMLElement | null) => void) => {
@@ -89,6 +91,7 @@ const Calendar = () => {
         if (selectedMembers.length <= 1) {
             if (selected) {
                 backColor = "green"
+                console.log(date)
             } 
         }
         else {
@@ -123,6 +126,7 @@ const Calendar = () => {
         <ScheduleSelector
             renderDateCell={renderDateCell}
             selection={timeSlots}
+            startDate={d}
             numDays={7}
             minTime={8}
             maxTime={24}
